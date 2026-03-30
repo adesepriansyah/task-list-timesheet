@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
 import { loginUser } from "@/services/authService";
+import { Toast } from "@/components/Toast";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -13,6 +14,7 @@ export default function LoginPage() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,8 +23,8 @@ export default function LoginPage() {
 
     try {
       const res = await loginUser({ email, password });
-      alert(`Login Success! Welcome ${res.user.name}`);
-      router.push("/");
+      setToast({ message: `Login Success! Welcome ${res.user.name}`, type: "success" });
+      setTimeout(() => router.push("/dashboard"), 1000);
     } catch (err: any) {
       setErrorMsg(err.message || "Login failed");
     } finally {
@@ -32,6 +34,7 @@ export default function LoginPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 dark:bg-gray-900 transition-colors">
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
           Sign in to your account

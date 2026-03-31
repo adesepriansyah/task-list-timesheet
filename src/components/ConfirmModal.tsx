@@ -52,7 +52,7 @@ export const ConfirmModal: React.FC<ConfirmModalProps> = ({
       case "warning":
         return "bg-amber-600 hover:bg-amber-700 shadow-amber-500/20";
       default:
-        return "bg-zinc-900 dark:bg-orange-500 hover:scale-105 shadow-orange-500/10";
+        return "bg-zinc-900 dark:bg-blue-600 hover:scale-105 shadow-blue-600/10";
     }
   };
 

@@ -20,7 +20,11 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, onLogo
     <aside className="w-64 bg-white dark:bg-zinc-900 border-r border-gray-100 dark:border-zinc-800 flex flex-col h-screen sticky top-0 transition-colors">
       <div className="p-6">
         <h2 className="text-xl font-bold text-gray-900 dark:text-white flex items-center gap-2">
-          <div className="w-8 h-8 bg-blue-600 rounded-lg"></div>
+          <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center">
+            <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+          </div>
           Timesheet
         </h2>
       </div>
@@ -45,9 +49,9 @@ export const Sidebar: React.FC<SidebarProps> = ({ activeTab, onTabChange, onLogo
       <div className="p-4 border-t border-gray-100 dark:border-zinc-800">
         <button
           onClick={onLogout}
-          className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/10 rounded-xl transition-all"
+          className="w-full flex items-center gap-3 px-4 py-3 text-sm font-medium text-blue-600 hover:bg-blue-50 dark:text-blue-400 dark:hover:bg-blue-900/10 rounded-xl transition-all"
         >
-          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/></svg>
+          <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1"/></svg>
           Logout
         </button>
       </div>

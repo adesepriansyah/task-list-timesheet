@@ -54,7 +54,7 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialData, onCan
     });
   };
 
-  const inputClass = "block w-full px-5 py-4 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/50 rounded-2xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 transition-all outline-none text-sm font-bold text-zinc-900 dark:text-white placeholder:text-zinc-400 placeholder:font-medium h-[58px]";
+  const inputClass = "block w-full px-5 py-4 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/50 rounded-2xl focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all outline-none text-sm font-bold text-zinc-900 dark:text-white placeholder:text-zinc-400 placeholder:font-medium h-[58px]";
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
@@ -122,7 +122,7 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialData, onCan
           placeholder="Describe your work (e.g. Github Issue link)..."
           required
           rows={3}
-          className="block w-full px-5 py-4 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/50 rounded-2xl focus:ring-4 focus:ring-orange-500/10 focus:border-orange-500 transition-all outline-none text-sm font-bold text-zinc-900 dark:text-white placeholder:text-zinc-400 placeholder:font-medium resize-none min-h-[120px]"
+          className="block w-full px-5 py-4 bg-zinc-50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700/50 rounded-2xl focus:ring-4 focus:ring-blue-600/10 focus:border-blue-600 transition-all outline-none text-sm font-bold text-zinc-900 dark:text-white placeholder:text-zinc-400 placeholder:font-medium resize-none min-h-[120px]"
           value={formData.description}
           onChange={(e) => setFormData({ ...formData, description: e.target.value })}
         />

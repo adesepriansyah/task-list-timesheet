@@ -1,15 +1,36 @@
-buatkan issue.md , berisi planing untuk membuat ini
-
-program ini di gunakan untuk front end developer , yang nantinya akan di implementasikan oleh back end developer
-
-dan gunakan depedency :
-- React 
-- Next.js
-- TypeScript
-
-jangan terlalu low level atau detai;
-
-cukup instruksikan secara high level
+buatkan issue.md yang berisi perencanaan untuk nanti diimplementasikan oleh junior programing atau ai model yang lebih murah 
 
 
-nanti document planing nya akan di gunakan oleh programer atau model yang lebih murah untuk di implementasikan
+isi dari perencanaannya sebagai berikut :
+
+
+buatkan page dashboard yang di dalamnya terdapat 2 fitur:
+
+fitur home :
+
+melihat summary progess task yang di kerjakan
+
+fitur task
+
+- form input task , kolom inputnya untuk
+  - tanggal
+  - nama task
+  - deskripsi task
+  - status task (pending, in-progress, completed)
+  - total waktu  -> input jam dan menit  -> valuenya di convert menjadi total menit , contohnya dia input jam = 1 menit = 30 -> maka total menit = 90
+  - tombol simpan
+
+
+struktur folder di dalam src
+- app : berisi untuk halaman
+- compoennt : berisi untuk compenent yang bisa reusable
+- service : untuk logic Backend
+- type : untuk variabel yang akan di gunakan 
+
+Struktur file
+- page : menggunakan format misal users-route.ts
+- service : menggunakan format misa users-service.ts
+- type : menggunakan format misa users-service.ts
+
+
+jelaskan tahapan-tahapan yang harus dilakukan untuk mengimplementasikan fitur ini , anggap nanti yang mengimplementasikan adalah junior programer atau model ai yang lebih murah

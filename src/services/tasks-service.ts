@@ -5,6 +5,7 @@ import { mapBackendToFrontend, mapFrontendToBackend } from "./task-mapper";
 export const taskService = {
   getTasks: async (userId: number): Promise<Task[]> => {
     const res = await apiFetch<{ data: TaskBackend[] }>(`/tasks?user_id=${userId}`);
+    // Backend returns wrapped array: { data: [TaskBackend, ...] }
     return (res.data || []).map(mapBackendToFrontend);
   },
 
@@ -22,22 +23,22 @@ export const taskService = {
     );
   },
 
-  createTask: async (task: Omit<Task, "id">, userId: number): Promise<Task> => {
+  createTask: async (task: Omit<Task, "id">, userId: number): Promise<void> => {
     const payload = mapFrontendToBackend(task, userId);
-    const res = await apiFetch<{ data: TaskBackend }>("/tasks", {
+    await apiFetch<{ data: string }>("/tasks", {
       method: "POST",
       body: JSON.stringify(payload),
     });
-    return mapBackendToFrontend(res.data);
+    // Backend returns { data: "Ok" }, no need to map
   },
 
-  updateTask: async (id: string, updatedTask: Omit<Task, "id">, userId: number): Promise<Task> => {
+  updateTask: async (id: string, updatedTask: Omit<Task, "id">, userId: number): Promise<void> => {
     const payload = mapFrontendToBackend(updatedTask, userId);
-    const res = await apiFetch<{ data: TaskBackend }>(`/tasks/${id}`, {
+    await apiFetch<{ data: string }>(`/tasks/${id}`, {
       method: "PUT",
       body: JSON.stringify(payload),
     });
-    return mapBackendToFrontend(res.data);
+    // Backend returns { data: "Ok" }, no need to map
   },
 
   deleteTask: async (id: string): Promise<void> => {

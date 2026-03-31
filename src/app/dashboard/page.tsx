@@ -62,7 +62,7 @@ export default function DashboardPage() {
       setTasks(allTasks);
       setSummary(taskSummary);
     } catch (error) {
-      showToast("Failed to fetch data", "error");
+      showToast("task belum di tambahkan", "error");
     }
   }, [user]);
 
@@ -80,7 +80,7 @@ export default function DashboardPage() {
         setEditingTask(null);
       } else {
         await taskService.createTask({ ...taskData, status: "pending" }, user.id);
-        showToast("New task logged as Pending.");
+        showToast("Data Berhasil di Tambahkan");
       }
       setIsModalOpen(false);
       await fetchData();

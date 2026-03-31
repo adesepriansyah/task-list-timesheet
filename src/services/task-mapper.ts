@@ -4,9 +4,9 @@ import { Task, TaskBackend } from "@/types/tasks-type";
 export function mapBackendToFrontend(task: TaskBackend): Task {
   return {
     id: String(task.id),
-    date: task.date.replace(/-/g, ""),                      // "2026-04-01" -> "20260401"
+    date: task.date.split("T")[0].replace(/-/g, ""),           // "2026-03-31T..." -> "20260331"
     activity: task.title,
-    project: "",                                             // Backend tidak punya field project
+    project: task.project,
     description: task.description,
     status: task.status === "in_progress" ? "in-progress" : task.status as any,
     duration: task.effort_time,
@@ -24,6 +24,7 @@ export function mapFrontendToBackend(
 
   return {
     title: task.activity,
+    project: task.project,
     description: task.description,
     status: task.status === "in-progress" ? "in_progress" : task.status as any,
     user_id: userId,

@@ -49,5 +49,6 @@ export async function apiFetch<T>(
     throw new Error(errorBody.error || `Request failed: ${res.status}`);
   }
 
-  return res.json();
+  const text = await res.text();
+  return text ? JSON.parse(text) : {} as T;
 }

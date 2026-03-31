@@ -13,6 +13,7 @@ export interface Task {
 export interface TaskBackend {
   id: number;
   title: string;
+  project: string;
   description: string;
   status: "pending" | "in_progress" | "completed";
   user_id: number;

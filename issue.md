@@ -75,3 +75,24 @@ Programmer atau AI Model dapat mengerjakan fitur ini dengan mengikuti urutan tah
    - Tempatkan Formulir (Create) dan Tabel Data List (Read, Edit, Delete, Copy) dari **Fitur B** melengkapi halaman tersebut.
 
 *(Pastikan aplikasi berjalan tanpa Error TypeScript. Uji coba tombol **Copy** secara spesifik memastikan *string*-nya persis sama dengan contoh).*
+
+---
+
+## 4. Implementasi Docker & Environment
+
+Perencanaan untuk **Konfigurasi Environment (`.env`)** dan **Deployment Docker** telah dipindahkan ke panduan terpisah agar lebih terfokus:
+
+👉 **[issue-docker.md](file:///home/ades/storage/learn/task-list-timesheet/issue-docker.md)**
+
+---
+
+## 5. Checklist Akhir Fitur
+
+Gunakan checklist ini untuk memastikan pengembangan fitur Dashboard sudah selesai:
+
+- [ ] Kerangka data di `type/tasks-type.ts` sudah sesuai.
+- [ ] Komponen Tabel & Formulir sudah dibuat (dengan konversi waktu).
+- [ ] Tombol Copy menghasilkan format `/effort ...` yang tepat.
+- [ ] Service CRUD di `service/tasks-service.ts` sudah berfungsi.
+- [ ] Integrasi halaman Dashboard sudah selesai dan diuji coba.
+

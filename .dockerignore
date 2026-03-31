@@ -1,0 +1,24 @@
+# Dependencies (akan di-install ulang di container)
+node_modules
+
+# Build output lokal
+.next
+
+# Environment files
+.env
+.env.*
+
+# Version control
+.git
+.gitignore
+
+# IDE & OS
+.vscode
+.idea
+.DS_Store
+
+# Dokumentasi & file non-esensial
+*.md
+promp.txt
+promt_membuat_docker.txt
+LICENSE

@@ -11,16 +11,18 @@ import { Modal } from "@/components/Modal";
 import { ConfirmModal } from "@/components/ConfirmModal";
 import { taskService } from "@/services/tasks-service";
 import { Task, TaskSummary } from "@/types/tasks-type";
+import { useAuth } from "@/hooks/useAuth";
+import { logoutUser } from "@/services/authService";
 
 export default function DashboardPage() {
   const router = useRouter();
+  const { user, isAuthLoading } = useAuth();
   const [activeTab, setActiveTab] = useState<"home" | "tasks">("home");
   const [tasks, setTasks] = useState<Task[]>([]);
   const [summary, setSummary] = useState<TaskSummary>({ pending: 0, inProgress: 0, completed: 0, total: 0 });
   const [editingTask, setEditingTask] = useState<Task | null>(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [isPageLoading, setIsPageLoading] = useState(true);
   const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
   
   // Filtering & Copy logic
@@ -51,33 +53,33 @@ export default function DashboardPage() {
   };
 
   const fetchData = useCallback(async () => {
+    if (!user) return;
     try {
       const [allTasks, taskSummary] = await Promise.all([
-        taskService.getTasks(),
-        taskService.getSummary()
+        taskService.getTasks(user.id),
+        taskService.getSummary(user.id)
       ]);
       setTasks(allTasks);
       setSummary(taskSummary);
     } catch (error) {
       showToast("Failed to fetch data", "error");
-    } finally {
-      setIsPageLoading(false);
     }
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
   const handleSubmit = async (taskData: Omit<Task, "id">) => {
+    if (!user) return;
     setIsLoading(true);
     try {
       if (editingTask) {
-        await taskService.updateTask(editingTask.id, taskData);
+        await taskService.updateTask(editingTask.id, taskData, user.id);
         showToast("Entry updated!");
         setEditingTask(null);
       } else {
-        await taskService.createtask({ ...taskData, status: "pending" });
+        await taskService.createTask({ ...taskData, status: "pending" }, user.id);
         showToast("New task logged as Pending.");
       }
       setIsModalOpen(false);
@@ -90,13 +92,14 @@ export default function DashboardPage() {
   };
 
   const handleCopyConfirm = async () => {
-    if (!copyingTask) return;
+    if (!copyingTask || !user) return;
     
     const copyText = `/effort date:${copyingTask.date} activity:${copyingTask.activity} project:${copyingTask.project} description:${copyingTask.description} duration:${copyingTask.duration}`;
     
     try {
       await navigator.clipboard.writeText(copyText);
-      await taskService.updateTask(copyingTask.id, { status: "completed" });
+      const { id, ...taskData } = copyingTask;
+      await taskService.updateTask(id, { ...taskData, status: "completed" }, user.id);
       showToast("Copied & status updated to Done!");
       await fetchData();
     } catch (err) {
@@ -133,11 +136,16 @@ export default function DashboardPage() {
     setIsModalOpen(true);
   };
 
-  const handleLogout = () => {
+  const handleLogout = async () => {
+    try {
+      await logoutUser();
+    } catch (err) {
+      // Still redirect even if backend fails
+    }
     router.push("/login");
   };
 
-  if (isPageLoading) {
+  if (isAuthLoading) {
     return (
       <div className="min-h-screen flex items-center justify-center bg-gray-50 dark:bg-zinc-950">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-orange-500"></div>

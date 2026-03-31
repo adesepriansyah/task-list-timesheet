@@ -22,8 +22,8 @@ export default function LoginPage() {
     setErrorMsg("");
 
     try {
-      const res = await loginUser({ email, password });
-      setToast({ message: `Login Success! Welcome ${res.user.name}`, type: "success" });
+      await loginUser({ email, password });
+      setToast({ message: "Login Success!", type: "success" });
       setTimeout(() => router.push("/dashboard"), 1000);
     } catch (err: any) {
       setErrorMsg(err.message || "Login failed");

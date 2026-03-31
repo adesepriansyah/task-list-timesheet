@@ -6,7 +6,7 @@ export interface Task {
   activity: string;
   project: string;
   description: string;
-  status: "pending" | "in-progress" | "completed"; // UI status
+  status: TaskStatus;
   duration: number; // total minutes
 }
 

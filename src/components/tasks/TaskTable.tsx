@@ -53,23 +53,23 @@ export const TaskTable: React.FC<TaskTableProps> = ({ tasks, onEdit, onDelete, o
           ) : (
             tasks.map((task) => (
               <tr key={task.id} className="group transition-all duration-300 hover:-translate-y-1">
-                <td className="px-6 py-8 whitespace-nowrap text-sm font-bold text-zinc-900 dark:text-white tabular-nums align-top bg-white dark:bg-zinc-900 rounded-l-[1.5rem] border-y border-l border-zinc-100 dark:border-zinc-800 group-hover:border-orange-500/50 group-hover:bg-zinc-50 dark:group-hover:bg-zinc-800/20 shadow-sm transition-all">
+                <td className="px-6 py-8 whitespace-nowrap text-sm font-bold text-zinc-900 dark:text-white tabular-nums align-top bg-white dark:bg-zinc-900 rounded-l-[1.5rem] border-y border-l border-zinc-100 dark:border-zinc-800 group-hover:border-blue-600/50 group-hover:bg-zinc-50 dark:group-hover:bg-zinc-800/20 shadow-sm transition-all">
                   {task.date.slice(0, 4)}-{task.date.slice(4, 6)}-{task.date.slice(6, 8)}
                 </td>
-                <td className="px-6 py-8 whitespace-nowrap align-top bg-white dark:bg-zinc-900 border-y border-zinc-100 dark:border-zinc-800 group-hover:border-orange-500/50 group-hover:bg-zinc-50 dark:group-hover:bg-zinc-800/20 shadow-sm transition-all">
-                  <span className="inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-black bg-orange-100 dark:bg-orange-900/30 text-orange-600 dark:text-orange-400 uppercase tracking-wider">
+                <td className="px-6 py-8 whitespace-nowrap align-top bg-white dark:bg-zinc-900 border-y border-zinc-100 dark:border-zinc-800 group-hover:border-blue-600/50 group-hover:bg-zinc-50 dark:group-hover:bg-zinc-800/20 shadow-sm transition-all">
+                  <span className="inline-flex items-center px-3 py-1 rounded-lg text-[10px] font-black bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-400 uppercase tracking-wider">
                     {task.activity}
                   </span>
                 </td>
-                <td className="px-6 py-8 whitespace-nowrap text-sm font-bold text-zinc-600 dark:text-zinc-300 align-top bg-white dark:bg-zinc-900 border-y border-zinc-100 dark:border-zinc-800 group-hover:border-orange-500/50 group-hover:bg-zinc-50 dark:group-hover:bg-zinc-800/20 shadow-sm transition-all">
+                <td className="px-6 py-8 whitespace-nowrap text-sm font-bold text-zinc-600 dark:text-zinc-300 align-top bg-white dark:bg-zinc-900 border-y border-zinc-100 dark:border-zinc-800 group-hover:border-blue-600/50 group-hover:bg-zinc-50 dark:group-hover:bg-zinc-800/20 shadow-sm transition-all">
                   {task.project}
                 </td>
-                <td className="px-6 py-8 text-sm text-zinc-500 dark:text-zinc-400 align-top max-w-md bg-white dark:bg-zinc-900 border-y border-zinc-100 dark:border-zinc-800 group-hover:border-orange-500/50 group-hover:bg-zinc-50 dark:group-hover:bg-zinc-800/20 shadow-sm transition-all">
+                <td className="px-6 py-8 text-sm text-zinc-500 dark:text-zinc-400 align-top max-w-md bg-white dark:bg-zinc-900 border-y border-zinc-100 dark:border-zinc-800 group-hover:border-blue-600/50 group-hover:bg-zinc-50 dark:group-hover:bg-zinc-800/20 shadow-sm transition-all">
                   <div className="leading-relaxed whitespace-pre-wrap break-words min-w-[200px]" title={task.description}>
                     {task.description}
                   </div>
                 </td>
-                <td className="px-6 py-8 whitespace-nowrap align-top bg-white dark:bg-zinc-900 border-y border-zinc-100 dark:border-zinc-800 group-hover:border-orange-500/50 group-hover:bg-zinc-50 dark:group-hover:bg-zinc-800/20 shadow-sm transition-all">
+                <td className="px-6 py-8 whitespace-nowrap align-top bg-white dark:bg-zinc-900 border-y border-zinc-100 dark:border-zinc-800 group-hover:border-blue-600/50 group-hover:bg-zinc-50 dark:group-hover:bg-zinc-800/20 shadow-sm transition-all">
                   <span className={`inline-flex items-center px-3 py-1 rounded-full text-[10px] font-black uppercase tracking-widest ring-1 ring-inset ${
                     task.status === "completed"
                       ? "bg-emerald-50 text-emerald-600 ring-emerald-600/20 dark:bg-emerald-900/20 dark:text-emerald-400 dark:ring-emerald-400/20"
@@ -79,20 +79,20 @@ export const TaskTable: React.FC<TaskTableProps> = ({ tasks, onEdit, onDelete, o
                     {task.status === "completed" ? "Done" : "Pending"}
                   </span>
                 </td>
-                <td className="px-6 py-8 whitespace-nowrap text-sm font-bold text-zinc-900 dark:text-white tabular-nums align-top bg-white dark:bg-zinc-900 border-y border-zinc-100 dark:border-zinc-800 group-hover:border-orange-500/50 group-hover:bg-zinc-50 dark:group-hover:bg-zinc-800/20 shadow-sm transition-all">
+                <td className="px-6 py-8 whitespace-nowrap text-sm font-bold text-zinc-900 dark:text-white tabular-nums align-top bg-white dark:bg-zinc-900 border-y border-zinc-100 dark:border-zinc-800 group-hover:border-blue-600/50 group-hover:bg-zinc-50 dark:group-hover:bg-zinc-800/20 shadow-sm transition-all">
                   {task.duration} <span className="text-zinc-400 font-medium">min</span>
                 </td>
-                <td className="px-6 py-8 whitespace-nowrap text-right text-sm font-medium space-x-4 align-top bg-white dark:bg-zinc-900 border-y border-r border-zinc-100 dark:border-zinc-800 rounded-r-[1.5rem] group-hover:border-orange-500/50 group-hover:bg-zinc-50 dark:group-hover:bg-zinc-800/20 shadow-sm transition-all">
+                <td className="px-6 py-8 whitespace-nowrap text-right text-sm font-medium space-x-4 align-top bg-white dark:bg-zinc-900 border-y border-r border-zinc-100 dark:border-zinc-800 rounded-r-[1.5rem] group-hover:border-blue-600/50 group-hover:bg-zinc-50 dark:group-hover:bg-zinc-800/20 shadow-sm transition-all">
                   <button
                     onClick={() => onEdit(task)}
-                    className="text-zinc-400 hover:text-orange-500 dark:hover:text-orange-400 transition-colors"
+                    className="text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
                     title="Edit Entry"
                   >
                     <svg className="w-5 h-5 inline" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M11 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/></svg>
                   </button>
                   <button
                     onClick={() => onStatusChange(task.id, "completed")}
-                    className="px-4 py-2 bg-zinc-900 dark:bg-orange-500 text-white rounded-xl text-[10px] font-black uppercase tracking-wider hover:scale-105 active:scale-95 transition-all shadow-lg shadow-orange-500/10"
+                    className="px-4 py-2 bg-zinc-900 dark:bg-blue-600 text-white rounded-xl text-[10px] font-black uppercase tracking-wider hover:scale-105 active:scale-95 transition-all shadow-lg shadow-blue-600/10"
                   >
                     Copy
                   </button>

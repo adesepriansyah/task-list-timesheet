@@ -1,4 +1,4 @@
-export type TaskStatus = "pending" | "in-progress" | "completed";
+export type TaskStatus = "pending" | "in_progress" | "completed";
 
 export interface Task {
   id: string;
@@ -6,8 +6,19 @@ export interface Task {
   activity: string;
   project: string;
   description: string;
-  status: TaskStatus;
+  status: "pending" | "in-progress" | "completed"; // UI status
   duration: number; // total minutes
+}
+
+export interface TaskBackend {
+  id: number;
+  title: string;
+  project: string;
+  description: string;
+  status: "pending" | "in_progress" | "completed";
+  user_id: number;
+  date: string;          // "YYYY-MM-DD"
+  effort_time: number;   // menit
 }
 
 export interface TaskSummary {

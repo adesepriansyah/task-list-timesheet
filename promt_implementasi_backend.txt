@@ -1,0 +1,11 @@
+buatkan issue.md yang berisi perencanaan untuk nanti diimplementasikan oleh junior programing atau ai model yang lebih murah 
+
+
+isi dari perencanaannya sebagai berikut :
+
+- integrasikan endpoint yang ada di api_testing.md ke dalam aplikasi sesuaikan dengan fitur fitur yang sudah di buat
+
+- buatkan validasi session menggunakan jwt yang dari backend , karena sudah menyiapkan endpoint get user info
+
+
+jelaskan tahapan-tahapan yang harus dilakukan untuk mengimplementasikan fitur ini , anggap nanti yang mengimplementasikan adalah junior programer atau model ai yang lebih murah

@@ -1,24 +1,17 @@
-import { Task, TaskSummary } from "../types/tasks-type";
-
-let mockTasks: Task[] = [
-  {
-    id: "1",
-    date: "20260330",
-    activity: "Coding",
-    project: "DTP Finnet",
-    description: "https://github.com/adesepriansyah/task-list-timesheet/issues/1",
-    status: "completed",
-    duration: 300,
-  }
-];
+import { Task, TaskSummary, TaskBackend } from "@/types/tasks-type";
+import { apiFetch } from "./api";
+import { mapBackendToFrontend, mapFrontendToBackend } from "./task-mapper";
 
 export const taskService = {
-  getTasks: async (): Promise<Task[]> => {
-    return new Promise((resolve) => setTimeout(() => resolve([...mockTasks]), 500));
+  getTasks: async (userId: number): Promise<Task[]> => {
+    const res = await apiFetch<{ data: TaskBackend[] }>(`/tasks?user_id=${userId}`);
+    // Backend returns wrapped array: { data: [TaskBackend, ...] }
+    return (res.data || []).map(mapBackendToFrontend);
   },
 
-  getSummary: async (): Promise<TaskSummary> => {
-    const summary = mockTasks.reduce(
+  getSummary: async (userId: number): Promise<TaskSummary> => {
+    const tasks = await taskService.getTasks(userId);
+    return tasks.reduce(
       (acc, task) => {
         if (task.status === "pending") acc.pending++;
         else if (task.status === "in-progress") acc.inProgress++;
@@ -28,23 +21,27 @@ export const taskService = {
       },
       { pending: 0, inProgress: 0, completed: 0, total: 0 }
     );
-    return new Promise((resolve) => setTimeout(() => resolve(summary), 500));
   },
 
-  createtask: async (task: Omit<Task, "id">): Promise<Task> => {
-    const newTask = { ...task, id: Math.random().toString(36).substr(2, 9) };
-    mockTasks = [newTask, ...mockTasks];
-    return new Promise((resolve) => setTimeout(() => resolve(newTask), 500));
+  createTask: async (task: Omit<Task, "id">, userId: number): Promise<void> => {
+    const payload = mapFrontendToBackend(task, userId);
+    await apiFetch<{ data: string }>("/tasks", {
+      method: "POST",
+      body: JSON.stringify(payload),
+    });
+    // Backend returns { data: "Ok" }, no need to map
   },
 
-  updateTask: async (id: string, updatedTask: Partial<Task>): Promise<Task> => {
-    mockTasks = mockTasks.map((t) => (t.id === id ? { ...t, ...updatedTask } : t));
-    const task = mockTasks.find((t) => t.id === id)!;
-    return new Promise((resolve) => setTimeout(() => resolve(task), 500));
+  updateTask: async (id: string, updatedTask: Omit<Task, "id">, userId: number): Promise<void> => {
+    const payload = mapFrontendToBackend(updatedTask, userId);
+    await apiFetch<{ data: string }>(`/tasks/${id}`, {
+      method: "PUT",
+      body: JSON.stringify(payload),
+    });
+    // Backend returns { data: "Ok" }, no need to map
   },
 
   deleteTask: async (id: string): Promise<void> => {
-    mockTasks = mockTasks.filter((t) => t.id !== id);
-    return new Promise((resolve) => setTimeout(() => resolve(), 500));
+    await apiFetch(`/tasks/${id}`, { method: "DELETE" });
   },
 };

@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Input } from "@/components/Input";
 import { Button } from "@/components/Button";
 import { registerUser } from "@/services/authService";
+import { Toast } from "@/components/Toast";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -14,6 +15,7 @@ export default function RegisterPage() {
   const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [errorMsg, setErrorMsg] = useState("");
+  const [toast, setToast] = useState<{ message: string; type: "success" | "error" } | null>(null);
 
   const handleRegister = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -21,9 +23,9 @@ export default function RegisterPage() {
     setErrorMsg("");
 
     try {
-      const res = await registerUser({ name, email, password });
-      alert(`Registration Success! Welcome ${res.user.name}`);
-      router.push("/login");
+      await registerUser({ name, email, password });
+      setToast({ message: "User Berhasil di Tambahkan", type: "success" });
+      setTimeout(() => router.push("/login"), 1000);
     } catch (err: any) {
       setErrorMsg(err.message || "Registration failed");
     } finally {
@@ -33,6 +35,7 @@ export default function RegisterPage() {
 
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col justify-center py-12 sm:px-6 lg:px-8 dark:bg-gray-900 transition-colors">
+      {toast && <Toast message={toast.message} type={toast.type} onClose={() => setToast(null)} />}
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900 dark:text-white">
           Create a new account

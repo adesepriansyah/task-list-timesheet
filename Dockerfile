@@ -18,6 +18,10 @@ FROM oven/bun:1 AS builder
 
 WORKDIR /app
 
+# Accept build arguments for public env vars
+ARG NEXT_PUBLIC_API_BASE_URL
+ARG NEXT_PUBLIC_APP_URL
+
 # Copy dependencies dari stage sebelumnya
 COPY --from=deps /app/node_modules ./node_modules
 
@@ -27,6 +31,8 @@ COPY . .
 # Set environment untuk build
 ENV NEXT_TELEMETRY_DISABLED=1
 ENV NODE_ENV=production
+ENV NEXT_PUBLIC_API_BASE_URL=${NEXT_PUBLIC_API_BASE_URL}
+ENV NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}
 
 # Build Next.js (output: standalone)
 RUN bun run build

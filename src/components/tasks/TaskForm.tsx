@@ -83,6 +83,7 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialData, onCan
             <option value="Testing">Testing</option>
             <option value="Documentation">Documentation</option>
             <option value="Research">Research</option>
+            <option value="Other">Other</option>
           </select>
         </div>
       </div>
@@ -90,13 +91,17 @@ export const TaskForm: React.FC<TaskFormProps> = ({ onSubmit, initialData, onCan
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
         <div className="space-y-2">
           <label className="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-[0.2em] ml-1">Project Name</label>
-          <input
-            placeholder="e.g. DTP Finnet"
-            required
+          <select
             className={inputClass}
             value={formData.project}
             onChange={(e) => setFormData({ ...formData, project: e.target.value })}
-          />
+            required
+          >
+            <option value="">Select Project</option>
+            <option value="DTP Finnet">DTP Finnet</option>
+            <option value="AJ Web Admin Microsite - BPR Universal">AJ Web Admin Microsite - BPR Universal</option>
+            <option value="Non Project">Non Project</option>
+          </select>
         </div>
         <div className="space-y-2">
           <label className="text-[10px] font-black text-zinc-400 dark:text-zinc-500 uppercase tracking-[0.2em] ml-1">
